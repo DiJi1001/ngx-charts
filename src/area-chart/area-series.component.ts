@@ -26,6 +26,8 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [animations]="animations"
       [class.active]="isActive(data)"
       [class.inactive]="isInactive(data)"
+      [paths]="paths"
+      [startingPaths]="startingPaths"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -50,6 +52,9 @@ export class AreaSeriesComponent implements OnChanges {
   opacity: number;
   path: string;
   startingPath: string;
+
+  paths: string[] = [];
+  startingPaths: string[] = [];
 
   hasGradient: boolean;
   gradientStops: any[];
@@ -107,6 +112,16 @@ export class AreaSeriesComponent implements OnChanges {
 
     this.path = currentArea(data);
     this.startingPath = startingArea(data);
+    this.paths = [];
+    this.startingPaths = [];
+
+    for(let i = 0; i < data.length - 1; i++) {
+      let d = [data[i], data[i+1]];
+      let p = currentArea(d);
+      let sp = startingArea(d);
+      this.paths.push(p);
+      this.startingPaths.push(sp);
+    }
   }
 
   updateGradient() {

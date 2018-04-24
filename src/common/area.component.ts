@@ -21,12 +21,14 @@ import { id } from '../utils/id';
         [stops]="gradientStops"
       />
     </svg:defs>
-    <svg:path
-      class="area"
-      [attr.d]="areaPath"
+
+    <svg:path *ngFor="let path of paths; let idx = index"
+      [ngClass]="'area-' + idx"
+      [attr.d]="path"
       [attr.fill]="gradient ? gradientFill : fill"
       [style.opacity]="opacity"
     />
+
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -43,6 +45,8 @@ export class AreaComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  @Input() paths;
+  @Input() startingPaths;
 
   @Output() select = new EventEmitter();
 

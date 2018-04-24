@@ -71,7 +71,6 @@ export class AreaComponent implements OnChanges {
     } else {
       this.update();
     }
-    console.log(this.colors);
   }
 
   update(): void {

@@ -3680,6 +3680,8 @@ var AreaSeriesComponent = /** @class */ (function () {
         this.normalized = false;
         this.animations = true;
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.paths = [];
+        this.startingPaths = [];
     }
     AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
@@ -3728,6 +3730,15 @@ var AreaSeriesComponent = /** @class */ (function () {
         }
         this.path = currentArea(data);
         this.startingPath = startingArea(data);
+        this.paths = [];
+        this.startingPaths = [];
+        for (var i = 0; i < data.length - 1; i++) {
+            var d = [data[i], data[i + 1]];
+            var p = currentArea(d);
+            var sp = startingArea(d);
+            this.paths.push(p);
+            this.startingPaths.push(sp);
+        }
     };
     AreaSeriesComponent.prototype.updateGradient = function () {
         if (this.colors.scaleType === 'linear') {
@@ -3821,7 +3832,7 @@ var AreaSeriesComponent = /** @class */ (function () {
     AreaSeriesComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-area-series]',
-            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [animations]=\"animations\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n    />\n  ",
+            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [animations]=\"animations\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n      [paths]=\"paths\"\n      [startingPaths]=\"startingPaths\"\n      [colors] = \"data.colors\"\n    />\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         })
     ], AreaSeriesComponent);
@@ -8106,6 +8117,7 @@ var AreaComponent = /** @class */ (function () {
         this.endOpacity = 1;
         this.gradient = false;
         this.animations = true;
+        this.colors = [];
         this.select = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
         this.initialized = false;
         this.hasGradient = false;
@@ -8163,6 +8175,14 @@ var AreaComponent = /** @class */ (function () {
             }
         ];
     };
+    AreaComponent.prototype.getColor = function (index) {
+        if (this.colors && this.colors.length > index) {
+            return this.colors[index];
+        }
+        else {
+            return this.fill;
+        }
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
         __metadata("design:type", Object)
@@ -8208,13 +8228,25 @@ var AreaComponent = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], AreaComponent.prototype, "animations", void 0);
     __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object)
+    ], AreaComponent.prototype, "paths", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Object)
+    ], AreaComponent.prototype, "startingPaths", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(),
+        __metadata("design:type", Array)
+    ], AreaComponent.prototype, "colors", void 0);
+    __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(),
         __metadata("design:type", Object)
     ], AreaComponent.prototype, "select", void 0);
     AreaComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'g[ngx-charts-area]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
+            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n\n    <svg:path *ngFor=\"let path of paths; let idx = index\"\n      [ngClass]=\"'area-' + idx\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : getColor(idx)\"\n      [style.opacity]=\"opacity\"\n    />\n\n  ",
             changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])

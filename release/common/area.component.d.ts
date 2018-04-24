@@ -13,6 +13,7 @@ export declare class AreaComponent implements OnChanges {
     animations: boolean;
     paths: any;
     startingPaths: any;
+    colors: any[];
     select: EventEmitter<{}>;
     element: HTMLElement;
     gradientId: string;
@@ -27,4 +28,5 @@ export declare class AreaComponent implements OnChanges {
     loadAnimation(): void;
     updatePathEl(): void;
     getGradient(): any[];
+    getColor(index: any): any;
 }

@@ -17,6 +17,7 @@ var AreaComponent = /** @class */ (function () {
         this.endOpacity = 1;
         this.gradient = false;
         this.animations = true;
+        this.colors = [];
         this.select = new EventEmitter();
         this.initialized = false;
         this.hasGradient = false;
@@ -74,6 +75,14 @@ var AreaComponent = /** @class */ (function () {
             }
         ];
     };
+    AreaComponent.prototype.getColor = function (index) {
+        if (this.colors && this.colors.length > index) {
+            return this.colors[index];
+        }
+        else {
+            return this.fill;
+        }
+    };
     __decorate([
         Input(),
         __metadata("design:type", Object)
@@ -119,13 +128,25 @@ var AreaComponent = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], AreaComponent.prototype, "animations", void 0);
     __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaComponent.prototype, "paths", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AreaComponent.prototype, "startingPaths", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Array)
+    ], AreaComponent.prototype, "colors", void 0);
+    __decorate([
         Output(),
         __metadata("design:type", Object)
     ], AreaComponent.prototype, "select", void 0);
     AreaComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-area]',
-            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n    <svg:path\n      class=\"area\"\n      [attr.d]=\"areaPath\"\n      [attr.fill]=\"gradient ? gradientFill : fill\"\n      [style.opacity]=\"opacity\"\n    />\n  ",
+            template: "\n    <svg:defs *ngIf=\"gradient\">\n      <svg:g ngx-charts-svg-linear-gradient\n        orientation=\"vertical\"\n        [name]=\"gradientId\"\n        [stops]=\"gradientStops\"\n      />\n    </svg:defs>\n\n    <svg:path *ngFor=\"let path of paths; let idx = index\"\n      [ngClass]=\"'area-' + idx\"\n      [attr.d]=\"path\"\n      [attr.fill]=\"gradient ? gradientFill : getColor(idx)\"\n      [style.opacity]=\"opacity\"\n    />\n\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         }),
         __metadata("design:paramtypes", [ElementRef])

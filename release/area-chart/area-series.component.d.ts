@@ -16,6 +16,8 @@ export declare class AreaSeriesComponent implements OnChanges {
     opacity: number;
     path: string;
     startingPath: string;
+    paths: string[];
+    startingPaths: string[];
     hasGradient: boolean;
     gradientStops: any[];
     ngOnChanges(changes: SimpleChanges): void;

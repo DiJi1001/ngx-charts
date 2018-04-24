@@ -25,7 +25,7 @@ import { reduceTicks } from './ticks.helper';
           [attr.text-anchor]="textAnchor"
           [attr.transform]="textTransform"
           [style.font-size]="'12px'">
-          {{trimLabel(tickFormat(tick))}}
+          {{tickFormat(tick)}}
         </svg:text>
       </svg:g>
     </svg:g>

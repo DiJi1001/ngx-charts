@@ -28,7 +28,7 @@ import { roundedRect } from '../../common/shape.helper';
           [attr.y]="y1"
           [attr.text-anchor]="textAnchor"
           [style.font-size]="'12px'">
-          {{trimLabel(tickFormat(tick))}}
+          {{tickFormat(tick)}}
         </svg:text>
       </svg:g>
     </svg:g>
@@ -61,7 +61,7 @@ import { roundedRect } from '../../common/shape.helper';
           [attr.x2]="gridLineWidth"
           [attr.transform]="gridLineTransform()"/>
         <svg:g *ngIf="showRefLabels">
-          <title>{{trimLabel(tickFormat(refLine.value))}}</title>
+          <title>{{tickFormat(refLine.value)}}</title>
           <svg:text
             class="refline-label"
             [attr.dy]="dy"

@@ -13,7 +13,7 @@ export declare class AreaComponent implements OnChanges {
     animations: boolean;
     paths: any;
     startingPaths: any;
-    colors: any[];
+    seriesColors: any[];
     select: EventEmitter<{}>;
     element: HTMLElement;
     gradientId: string;

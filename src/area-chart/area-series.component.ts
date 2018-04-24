@@ -28,7 +28,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [class.inactive]="isInactive(data)"
       [paths]="paths"
       [startingPaths]="startingPaths"
-      [colors] = "data.colors"
+      [seriesColors] = "seriesColors"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -47,6 +47,7 @@ export class AreaSeriesComponent implements OnChanges {
   @Input() curve;
   @Input() activeEntries: any[];
   @Input() animations: boolean = true;
+  @Input() seriesColors;
 
   @Output() select = new EventEmitter();
 
@@ -62,6 +63,8 @@ export class AreaSeriesComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.update();
+
+    console.log(this.seriesColors);
   }
 
   update(): void {

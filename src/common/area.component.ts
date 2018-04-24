@@ -25,7 +25,7 @@ import { id } from '../utils/id';
     <svg:path *ngFor="let path of paths; let idx = index"
       [ngClass]="'area-' + idx"
       [attr.d]="path"
-      [attr.fill]="gradient ? gradientFill : fill"
+      [attr.fill]="gradient ? gradientFill : getColor(idx)"
       [style.opacity]="opacity"
     />
 
@@ -45,8 +45,10 @@ export class AreaComponent implements OnChanges {
   @Input() gradient: boolean = false;
   @Input() stops: any[];
   @Input() animations: boolean = true;
+  
   @Input() paths;
   @Input() startingPaths;
+  @Input() colors : any[] = [];
 
   @Output() select = new EventEmitter();
 
@@ -69,6 +71,7 @@ export class AreaComponent implements OnChanges {
     } else {
       this.update();
     }
+    console.log(this.colors);
   }
 
   update(): void {
@@ -117,5 +120,12 @@ export class AreaComponent implements OnChanges {
         color: this.fill,
         opacity: this.endOpacity
     }];
+  }
+  getColor(index){
+    if(this.colors && this.colors.length > index){
+      return this.colors[index];
+    }else{
+      return this.fill;
+    }
   }
 }

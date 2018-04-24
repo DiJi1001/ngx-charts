@@ -28,6 +28,7 @@ import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
       [class.inactive]="isInactive(data)"
       [paths]="paths"
       [startingPaths]="startingPaths"
+      [colors] = "data.colors"
     />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

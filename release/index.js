@@ -8131,7 +8131,6 @@ var AreaComponent = /** @class */ (function () {
         else {
             this.update();
         }
-        console.log(this.colors);
     };
     AreaComponent.prototype.update = function () {
         this.gradientId = 'grad' + Object(__WEBPACK_IMPORTED_MODULE_2__utils_id__["a" /* id */])().toString();

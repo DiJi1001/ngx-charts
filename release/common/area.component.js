@@ -31,7 +31,6 @@ var AreaComponent = /** @class */ (function () {
         else {
             this.update();
         }
-        console.log(this.colors);
     };
     AreaComponent.prototype.update = function () {
         this.gradientId = 'grad' + id().toString();

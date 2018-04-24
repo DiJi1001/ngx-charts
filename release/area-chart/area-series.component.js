@@ -22,7 +22,6 @@ var AreaSeriesComponent = /** @class */ (function () {
     }
     AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
-        console.log(this.seriesColors);
     };
     AreaSeriesComponent.prototype.update = function () {
         var _this = this;
@@ -164,17 +163,13 @@ var AreaSeriesComponent = /** @class */ (function () {
         __metadata("design:type", Boolean)
     ], AreaSeriesComponent.prototype, "animations", void 0);
     __decorate([
-        Input(),
-        __metadata("design:type", Object)
-    ], AreaSeriesComponent.prototype, "seriesColors", void 0);
-    __decorate([
         Output(),
         __metadata("design:type", Object)
     ], AreaSeriesComponent.prototype, "select", void 0);
     AreaSeriesComponent = __decorate([
         Component({
             selector: 'g[ngx-charts-area-series]',
-            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [animations]=\"animations\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n      [paths]=\"paths\"\n      [startingPaths]=\"startingPaths\"\n      [seriesColors] = \"seriesColors\"\n    />\n  ",
+            template: "\n    <svg:g ngx-charts-area\n      class=\"area-series\"\n      [data]=\"data\"\n      [path]=\"path\"\n      [fill]=\"colors.getColor(data.name)\"\n      [stops]=\"gradientStops\"\n      [startingPath]=\"startingPath\"\n      [opacity]=\"opacity\"\n      [gradient]=\"gradient || hasGradient\"\n      [animations]=\"animations\"\n      [class.active]=\"isActive(data)\"\n      [class.inactive]=\"isInactive(data)\"\n      [paths]=\"paths\"\n      [startingPaths]=\"startingPaths\"\n      [colors] = \"colors.colorDomain\"\n    />\n  ",
             changeDetection: ChangeDetectionStrategy.OnPush
         })
     ], AreaSeriesComponent);

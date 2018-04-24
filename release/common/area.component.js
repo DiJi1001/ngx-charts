@@ -17,7 +17,7 @@ var AreaComponent = /** @class */ (function () {
         this.endOpacity = 1;
         this.gradient = false;
         this.animations = true;
-        this.seriesColors = [];
+        this.colors = [];
         this.select = new EventEmitter();
         this.initialized = false;
         this.hasGradient = false;
@@ -31,7 +31,7 @@ var AreaComponent = /** @class */ (function () {
         else {
             this.update();
         }
-        console.log(this.seriesColors);
+        console.log(this.colors);
     };
     AreaComponent.prototype.update = function () {
         this.gradientId = 'grad' + id().toString();
@@ -77,8 +77,8 @@ var AreaComponent = /** @class */ (function () {
         ];
     };
     AreaComponent.prototype.getColor = function (index) {
-        if (this.seriesColors && this.seriesColors.length > index) {
-            return this.seriesColors[index];
+        if (this.colors && this.colors.length > index) {
+            return this.colors[index];
         }
         else {
             return this.fill;
@@ -139,7 +139,7 @@ var AreaComponent = /** @class */ (function () {
     __decorate([
         Input(),
         __metadata("design:type", Array)
-    ], AreaComponent.prototype, "seriesColors", void 0);
+    ], AreaComponent.prototype, "colors", void 0);
     __decorate([
         Output(),
         __metadata("design:type", Object)

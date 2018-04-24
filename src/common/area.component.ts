@@ -48,7 +48,7 @@ export class AreaComponent implements OnChanges {
   
   @Input() paths;
   @Input() startingPaths;
-  @Input() seriesColors : any[] = [];
+  @Input() colors : any[] = [];
 
   @Output() select = new EventEmitter();
 
@@ -71,8 +71,8 @@ export class AreaComponent implements OnChanges {
     } else {
       this.update();
     }
-
-    console.log(this.seriesColors);
+    
+    console.log(this.colors);
   }
 
   update(): void {
@@ -123,8 +123,8 @@ export class AreaComponent implements OnChanges {
     }];
   }
   getColor(index){
-    if(this.seriesColors && this.seriesColors.length > index){
-      return this.seriesColors[index];
+    if(this.colors && this.colors.length > index){
+      return this.colors[index];
     }else{
       return this.fill;
     }

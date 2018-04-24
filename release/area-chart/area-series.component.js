@@ -22,6 +22,7 @@ var AreaSeriesComponent = /** @class */ (function () {
     }
     AreaSeriesComponent.prototype.ngOnChanges = function (changes) {
         this.update();
+        console.log(this.data);
     };
     AreaSeriesComponent.prototype.update = function () {
         var _this = this;
